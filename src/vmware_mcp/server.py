@@ -32,6 +32,11 @@ def get_vmrun() -> VMRun:
 
 
 async def get_vmx_path(vm_id: str) -> str:
+    """Convert VM ID to vmx path. Supports both VM IDs and direct vmx paths."""
+    # If vm_id is already a vmx path, return it directly
+    if vm_id.endswith(".vmx") or "/" in vm_id or "\\" in vm_id:
+        return vm_id
+
     if vm_id not in _vm_path_cache:
         client = get_client()
         vms = await client.list_vms()

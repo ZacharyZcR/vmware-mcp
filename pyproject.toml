@@ -1,0 +1,16 @@
+[project]
+name = "vmware-mcp"
+version = "0.1.0"
+description = "MCP server for VMware Workstation Pro"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.0.0",
+]
+
+[project.scripts]
+vmware-mcp = "vmware_mcp.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

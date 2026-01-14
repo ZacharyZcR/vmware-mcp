@@ -197,3 +197,112 @@ class VMCli:
 
     async def config_set(self, vmx_path: str, key: str, value: str) -> str:
         return await self._run(vmx_path, "ConfigParams", "SetEntry", "-k", key, "-v", value)
+
+    # === Power ===
+    async def power_query(self, vmx_path: str) -> str:
+        return await self._run(vmx_path, "Power", "query")
+
+    async def power_start(self, vmx_path: str) -> str:
+        return await self._run(vmx_path, "Power", "Start")
+
+    async def power_stop(self, vmx_path: str) -> str:
+        return await self._run(vmx_path, "Power", "Stop")
+
+    async def power_pause(self, vmx_path: str) -> str:
+        return await self._run(vmx_path, "Power", "Pause")
+
+    async def power_unpause(self, vmx_path: str) -> str:
+        return await self._run(vmx_path, "Power", "Unpause")
+
+    async def power_reset(self, vmx_path: str) -> str:
+        return await self._run(vmx_path, "Power", "Reset")
+
+    async def power_suspend(self, vmx_path: str) -> str:
+        return await self._run(vmx_path, "Power", "Suspend")
+
+    # === Ethernet ===
+    async def ethernet_query(self, vmx_path: str) -> str:
+        return await self._run(vmx_path, "Ethernet", "query")
+
+    async def ethernet_set_connection_type(self, vmx_path: str, index: int, conn_type: str) -> str:
+        return await self._run(vmx_path, "Ethernet", "SetConnectionType", "-i", str(index), "-t", conn_type)
+
+    async def ethernet_set_present(self, vmx_path: str, index: int, present: bool) -> str:
+        return await self._run(vmx_path, "Ethernet", "SetPresent", "-i", str(index), "-e", "true" if present else "false")
+
+    async def ethernet_set_start_connected(self, vmx_path: str, index: int, connected: bool) -> str:
+        return await self._run(vmx_path, "Ethernet", "SetStartConnected", "-i", str(index), "-e", "true" if connected else "false")
+
+    async def ethernet_set_virtual_device(self, vmx_path: str, index: int, device: str) -> str:
+        return await self._run(vmx_path, "Ethernet", "SetVirtualDevice", "-i", str(index), "-d", device)
+
+    async def ethernet_set_network_name(self, vmx_path: str, index: int, name: str) -> str:
+        return await self._run(vmx_path, "Ethernet", "SetNetworkName", "-i", str(index), "-n", name)
+
+    async def ethernet_purge(self, vmx_path: str, index: int) -> str:
+        return await self._run(vmx_path, "Ethernet", "Purge", "-i", str(index))
+
+    # === HGFS (Shared Folders) ===
+    async def hgfs_query(self, vmx_path: str) -> str:
+        return await self._run(vmx_path, "HGFS", "query")
+
+    async def hgfs_set_enabled(self, vmx_path: str, index: int, enabled: bool) -> str:
+        return await self._run(vmx_path, "HGFS", "SetEnabled", "-i", str(index), "-e", "true" if enabled else "false")
+
+    async def hgfs_set_host_path(self, vmx_path: str, index: int, path: str) -> str:
+        return await self._run(vmx_path, "HGFS", "SetHostPath", "-i", str(index), "-p", path)
+
+    async def hgfs_set_guest_name(self, vmx_path: str, index: int, name: str) -> str:
+        return await self._run(vmx_path, "HGFS", "SetGuestName", "-i", str(index), "-n", name)
+
+    async def hgfs_set_present(self, vmx_path: str, index: int, present: bool) -> str:
+        return await self._run(vmx_path, "HGFS", "SetPresent", "-i", str(index), "-e", "true" if present else "false")
+
+    async def hgfs_set_read_access(self, vmx_path: str, index: int, read: bool) -> str:
+        return await self._run(vmx_path, "HGFS", "SetReadAccess", "-i", str(index), "-e", "true" if read else "false")
+
+    async def hgfs_set_write_access(self, vmx_path: str, index: int, write: bool) -> str:
+        return await self._run(vmx_path, "HGFS", "SetWriteAccess", "-i", str(index), "-e", "true" if write else "false")
+
+    # === Serial ===
+    async def serial_query(self, vmx_path: str) -> str:
+        return await self._run(vmx_path, "Serial", "Query")
+
+    async def serial_set_present(self, vmx_path: str, index: int, present: bool) -> str:
+        return await self._run(vmx_path, "Serial", "SetPresent", "-i", str(index), "-e", "true" if present else "false")
+
+    async def serial_purge(self, vmx_path: str, index: int) -> str:
+        return await self._run(vmx_path, "Serial", "Purge", "-i", str(index))
+
+    # === Sata ===
+    async def sata_query(self, vmx_path: str) -> str:
+        return await self._run(vmx_path, "Sata", "query")
+
+    async def sata_set_present(self, vmx_path: str, adapter: int, present: bool) -> str:
+        return await self._run(vmx_path, "Sata", "SetPresent", "-a", str(adapter), "-e", "true" if present else "false")
+
+    async def sata_purge(self, vmx_path: str, adapter: int) -> str:
+        return await self._run(vmx_path, "Sata", "Purge", "-a", str(adapter))
+
+    # === Nvme ===
+    async def nvme_query(self, vmx_path: str) -> str:
+        return await self._run(vmx_path, "Nvme", "query")
+
+    async def nvme_set_present(self, vmx_path: str, adapter: int, present: bool) -> str:
+        return await self._run(vmx_path, "Nvme", "SetPresent", "-a", str(adapter), "-e", "true" if present else "false")
+
+    async def nvme_purge(self, vmx_path: str, adapter: int) -> str:
+        return await self._run(vmx_path, "Nvme", "Purge", "-a", str(adapter))
+
+    # === VProbes ===
+    async def vprobes_query(self, vmx_path: str) -> str:
+        return await self._run(vmx_path, "VProbes", "Query")
+
+    async def vprobes_set_enabled(self, vmx_path: str, enabled: bool) -> str:
+        return await self._run(vmx_path, "VProbes", "SetEnabled", "-e", "true" if enabled else "false")
+
+    async def vprobes_load(self, vmx_path: str, script_path: str) -> str:
+        return await self._run(vmx_path, "VProbes", "Load", "-s", script_path)
+
+    async def vprobes_reset(self, vmx_path: str) -> str:
+        return await self._run(vmx_path, "VProbes", "Reset")
